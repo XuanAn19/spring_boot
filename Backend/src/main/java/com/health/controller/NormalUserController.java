@@ -111,4 +111,6 @@ public class NormalUserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
+	
+	
 }

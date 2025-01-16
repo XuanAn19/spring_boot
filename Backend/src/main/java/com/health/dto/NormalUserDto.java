@@ -15,7 +15,7 @@ public class NormalUserDto {
     private String address;
     private Date dateOfBirth;
     private String gender;
-        
+       
 
 	public String getPassword() {
 		return password;
