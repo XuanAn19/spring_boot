@@ -1,0 +1,57 @@
+<div class="content">
+
+    <form class="register-form" (ngSubmit)="addDoctor()">
+        <h2>Thêm Bác Sĩ</h2>
+        <div class="form-row">
+           
+            <input type="password" id="password" placeholder="Hãy nhập mật khẩu" [(ngModel)]="doctor.password"
+                name="password" required>
+
+            <input type="email" id="email" placeholder="Hãy nhập email" [(ngModel)]="doctor.email" name="email" required>
+              <input type="text" id="licenseNumber" placeholder="Hãy nhập số giấy phép" [(ngModel)]="doctor.licenseNumber"
+                name="licenseNumber">
+        </div>
+
+        <div class="form-row">
+
+            <input type="text" id="firstName" placeholder="Hãy nhập tên đệm " [(ngModel)]="doctor.firstName"
+                name="firstName" required>
+
+
+            <input type="text" id="lastName" placeholder="Hãy nhập tên " [(ngModel)]="doctor.lastName" name="lastName"
+                required>
+
+
+            <input type="text" id="phoneNumber" placeholder="Hãy nhập số điện thoại" [(ngModel)]="doctor.phoneNumber"
+                name="phoneNumber">
+        </div>
+
+        <div class="form-row">
+
+          
+
+
+            <input type="text" id="clinicAddress" placeholder="Hãy nhập địa chỉ phòng khám" [(ngModel)]="doctor.clinicAddress"
+                name="clinicAddress">
+
+
+            <input type="text" id="bio" placeholder="Hãy nhập bio" [(ngModel)]="doctor.bio" name="bio">
+        </div>
+
+        <div class="form-row">
+
+            <input type="text" id="yearsOfExperience" placeholder="Hãy nhập số năm kinh nghiệm"
+                [(ngModel)]="doctor.yearsOfExperience" name="yearsOfExperience">
+
+
+            <select id="specializationId" name="specializationId" [(ngModel)]="doctor.specializationId" required>
+                <option *ngFor="let specialization of specializations" [value]="specialization.specializationId">
+                    {{ specialization.specializationName }}
+                </option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-button">Đăng kí</button>
+    </form>
+
+</div>

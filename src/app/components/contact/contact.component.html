@@ -1,0 +1,44 @@
+<div class="contact-page">
+  <p>Liên hệ với chúng tôi</p>
+  <div class="contact-container">
+    <form #queryForm="ngForm" (ngSubmit)="postQuery()">
+      <div class="input-div">
+        <div class="input-divs">
+          <textarea id="message" [(ngModel)]="query.queries" #queries="ngModel" name="queries" required
+            placeholder="Vui lòng viết tin nhắn của bạn ở đây."></textarea>
+          <span *ngIf="queries.invalid && queries.touched" style="color: red;">
+            <span *ngIf="queries.errors?.['required']">Tin nhắn là bắt buộc.</span>
+          </span>
+        </div>
+
+        <div class="flexColumn">
+          <div class="input-divs">
+            <input type="email" id="email" [(ngModel)]="query.email" #email="ngModel" name="email" required
+              placeholder="...@gmail.com">
+            <span *ngIf="email.invalid && email.touched" style="color: red;">
+              <span *ngIf="email.errors?.['required']">Email bắt buộc.</span>
+            </span>
+          </div>
+
+          <div class="input-divs">
+            <input type="text" id="name" [(ngModel)]="query.name" #name="ngModel" name="name" required
+              placeholder="Tên">
+            <span *ngIf="name.invalid && name.touched" style="color: red;">
+              <span *ngIf="name.errors?.['required']">Tên bắt buột.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-divs">
+          <input type="text" id="subject" [(ngModel)]="query.subject" #subject="ngModel" name="subject" required
+            placeholder="Chủ đề">
+          <span *ngIf="subject.invalid && subject.touched" style="color: red;">
+            <span *ngIf="subject.errors?.['required']">Chủ đề là bắt buộc.</span>
+          </span>
+        </div>
+      </div>
+
+      <button [disabled]="queryForm.invalid" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

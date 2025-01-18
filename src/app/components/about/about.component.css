@@ -1,0 +1,135 @@
+/* Toàn bộ container */
+.about-us-container {
+    padding: 40px;
+    background: linear-gradient(135deg, #00bcd4, #8e24aa);
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+  }
+  
+/* Tiêu đề chính h1 */
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px; /* Khoảng cách từ phía trên */
+    margin-bottom: 30px; /* Khoảng cách từ phía dưới */
+    padding: 10px; /* Khoảng cách bên trong tiêu đề */
+  
+    border-radius: 8px; /* Bo góc tiêu đề */
+    color: #000000; /* Màu chữ */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tạo bóng cho tiêu đề */
+  }
+  
+  
+  /* Tiêu đề các phần */
+  h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 10px;
+  }
+  
+  /* Đoạn văn bản */
+  p {
+    font-size: 18px;
+    color: #f1f1f1;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+  
+  /* Danh sách */
+  ul, ol {
+    padding-left: 20px;
+  }
+  
+  ul li, ol li {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #f1f1f1;
+    transition: transform 0.3s ease;
+  }
+  
+  ul li:hover, ol li:hover {
+    transform: translateX(10px);
+    color: #ffeb3b;
+  }
+  
+  /* Section với nền màu nhẹ */
+  section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  section h2 {
+    color: #ffeb3b;
+  }
+  
+  /* Đoạn liên hệ */
+  .contact p {
+    font-weight: bold;
+    color: #ffeb3b;
+    font-size: 20px;
+  }
+  
+  .contact p:last-child {
+    margin-bottom: 30px;
+  }
+  
+  /* Định dạng cho liệt kê thông tin liên hệ */
+  .contact ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .contact li {
+    font-size: 18px;
+    color: #f1f1f1;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+  
+  .contact li a {
+    color: #ffeb3b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .contact li a:hover {
+    color: #fff;
+  }
+  
+  /* Hiệu ứng hover cho các nút */
+  ul li:hover, ol li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .about-us-container {
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 28px;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    p, ul li, ol li {
+      font-size: 16px;
+    }
+  }
+  

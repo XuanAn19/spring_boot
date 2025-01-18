@@ -1,0 +1,56 @@
+<div class="content">
+<div class="user-management">
+  
+    <!-- Create New User Form -->
+    <!--
+    <div>
+      <h2>Create New User</h2>
+      <form (ngSubmit)="createUser()">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" [(ngModel)]="newUser.firstName" name="firstName" required>
+  
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" [(ngModel)]="newUser.lastName" name="lastName" required>
+  
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="newUser.email" name="email" type="email" required>
+  
+        <label for="password">Password:</label>
+        <input id="password" [(ngModel)]="newUser.password" name="password" type="password" required>
+  
+        <label for="role">Role:</label>
+        <select id="role" [(ngModel)]="newUser.role" name="role">
+          <option value="NORMAL">User</option>
+          <option value="ADMIN">Admin</option>
+          <option value="DOCTOR">Doctor</option>
+        </select>
+  
+        <button type="submit">Create User</button>
+      </form>
+    </div>
+  -->
+    <!-- User List -->
+    <h2>Danh Sách Người Dùng</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Tên</th>
+      <th>Email</th>
+      <th>Quyền</th>
+      <th>Hành Động</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <!--<button (click)="selectUser(user)">Edit</button>-->
+        <button (click)="deleteUser(user.userId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>

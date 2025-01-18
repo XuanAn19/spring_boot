@@ -1,0 +1,416 @@
+.content{
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: url(https://themewagon.github.io/medicalcenter/assets/img/hero/hero2.png);
+}
+
+/* Đảm bảo bảng nằm dưới navbar */
+.appointments-container {
+    margin-top: 80px; /* Khoảng cách từ navbar xuống */
+    padding: 20px;
+  }
+  
+  /* Tiêu đề danh sách lịch hẹn */
+  .appointments-container h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000; /* Màu chữ đen */
+    margin-bottom: 20px;
+  }
+  
+  /* Container của bảng */
+  .table-container {
+    overflow-x: auto; /* Cuộn ngang nếu bảng quá rộng */
+    border-radius: 10px; /* Bo góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    background-color: #ffffff; /* Nền trắng */
+  }
+  
+  /* Style cho bảng */
+  table.mat-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff; /* Nền trắng */
+    table-layout: fixed; /* Cố định chiều rộng cột */
+  }
+  
+  /* Header của bảng */
+  th.mat-header-cell {
+    background-color: #3498db; /* Màu nền header xanh dương */
+    color: #000000; /* Màu chữ đen */
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    white-space: nowrap; /* Ngăn chặn xuống dòng */
+  }
+  
+  /* Ô dữ liệu */
+  td.mat-cell {
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1; /* Đường kẻ giữa các dòng */
+    color: #000000; /* Màu chữ đen */
+    white-space: nowrap; /* Ngăn chặn xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt quá kích thước */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." nếu nội dung quá dài */
+  }
+  
+  /* Hover effect cho các dòng */
+  tr.mat-row:hover {
+    background-color: #f5f5f5; /* Màu nền khi hover */
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Nút trong cột hành động */
+  button.mat-raised-button {
+    margin: 1px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px; /* Bo góc */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap; /* Ngăn chặn xuống dòng */
+    color: #000000; /* Màu chữ đen */
+  }
+  
+ /* Nút "Thêm điều trị" */
+button.mat-raised-button[color="primary"] {
+    background-color: #2ecc71; /* Màu xanh lá */
+    color: #000000; /* Màu chữ đen */
+  }
+  
+  /* Nút "Xem lịch sử điều trị" */
+  button.mat-raised-button[color="accent"] {
+    background-color: #e67e22; /* Màu cam */
+    color: #000000; /* Màu chữ đen */
+  }
+  
+  /* Hiệu ứng hover cho nút */
+  button.mat-raised-button:hover {
+    transform: translateY(-2px); /* Nhấc nút lên nhẹ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+  }
+  
+  /* Responsive cho bảng */
+  @media (max-width: 768px) {
+    .table-container {
+      overflow-x: auto; /* Cuộn ngang trên thiết bị nhỏ */
+    }
+  
+    th.mat-header-cell, td.mat-cell {
+      padding: 8px; /* Giảm padding trên thiết bị nhỏ */
+    }
+  
+    button.mat-raised-button {
+      font-size: 12px; /* Giảm kích thước chữ trên thiết bị nhỏ */
+    }
+  }
+
+  
+
+
+
+
+
+
+
+
+
+
+/* Style chung cho popup */
+.treatment-form, .treatment-history {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: rgb(11, 11, 11);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Hiệu ứng fadeIn */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  /* Style cho tiêu đề */
+  .treatment-form h2, .treatment-history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #060303;
+  }
+  
+  /* Style cho form */
+  .treatment-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Style cho các input và textarea */
+  .treatment-form textarea, .treatment-form input[type="text"], .treatment-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 14px;
+  }
+  
+  /* Style cho nút */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-container button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .button-container button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .button-container button[type="button"] {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .button-container button[type="button"]:hover {
+    background-color: #e53935;
+  }
+  
+  /* Style cho lịch sử điều trị */
+  .treatment-history .treatment-record {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .treatment-history .treatment-record p {
+    margin: 5px 0;
+    color: #fff;
+  }
+  
+  .treatment-history .treatment-record button {
+    margin-top: 10px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .treatment-history .treatment-record button:hover {
+    background-color: #e64a19;
+  }
+  
+  /* Style cho nút đóng */
+  .treatment-history button[mat-raised-button] {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #9c27b0;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .treatment-history button[mat-raised-button]:hover {
+    background-color: #8e24aa;
+  }
+  /* Overlay làm mờ phần nền */
+/* Overlay làm mờ phần nền */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 50% */
+    backdrop-filter: blur(3px); /* Hiệu ứng làm mờ nhẹ */
+    z-index: 999; /* Đảm bảo overlay nằm trên các phần khác */
+  }
+  
+  /* Form nhỏ nhắn và dễ thương */
+  .treatment-form, .treatment-history {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px; /* Bo góc lớn hơn */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: #333;
+    z-index: 1000; /* Đảm bảo form nằm trên overlay */
+    width: 90%;
+    max-width: 400px; /* Form nhỏ hơn */
+    max-height: 80vh; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+    animation: popIn 0.3s ease-in-out;
+    border: 2px solid #ff6f61; /* Viền màu hồng cam */
+  }
+  
+  /* Hiệu ứng popIn */
+  @keyframes popIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -60%) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  /* Tiêu đề form */
+  .treatment-form h2, .treatment-history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff6f61; /* Màu hồng cam */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Font chữ dễ thương */
+  }
+  
+  /* Style cho các input và textarea */
+  .treatment-form textarea, .treatment-form input[type="text"], .treatment-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px; /* Bo góc */
+    border: 1px solid #ff6f61; /* Viền màu hồng cam */
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .treatment-form textarea:focus, .treatment-form input[type="text"]:focus, .treatment-form input[type="date"]:focus {
+    border-color: #ff3b2f; /* Màu viền đậm hơn khi focus */
+    outline: none;
+  }
+  
+  /* Style cho nút */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 10px; /* Bo góc */
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Font chữ dễ thương */
+  }
+  
+  .button-container button[type="submit"] {
+    background-color: #ff6f61; /* Màu hồng cam */
+    color: white;
+  }
+  
+  .button-container button[type="submit"]:hover {
+    background-color: #ff3b2f; /* Màu đậm hơn khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+  }
+  
+  .button-container button[type="button"] {
+    background-color: #ffcccb; /* Màu hồng nhạt */
+    color: #333;
+  }
+  
+  .button-container button[type="button"]:hover {
+    background-color: #ffaaa9; /* Màu đậm hơn khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+  }
+  
+  /* Style cho lịch sử điều trị */
+  .treatment-history .treatment-record {
+    background: #fff3f2; /* Màu nền nhẹ nhàng */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ffcccb; /* Viền màu hồng nhạt */
+  }
+  
+  .treatment-history .treatment-record p {
+    margin: 5px 0;
+    color: #040404;
+  }
+  
+  .treatment-history .treatment-record button {
+    margin-top: 10px;
+    background-color: #ff6f61; /* Màu hồng cam */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .treatment-history .treatment-record button:hover {
+    background-color: #ff3b2f; /* Màu đậm hơn khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+  }
+  
+  /* Style cho nút đóng */
+  .treatment-history button[mat-raised-button] {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #ffcccb; /* Màu hồng nhạt */
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .treatment-history button[mat-raised-button]:hover {
+    background-color: #ffaaa9; /* Màu đậm hơn khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+  }

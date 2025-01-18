@@ -1,0 +1,45 @@
+.content{
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-image: url(https://themewagon.github.io/medicalcenter/assets/img/hero/hero2.png);
+}
+
+.content {
+  max-width: 600px;
+  margin: auto;
+}
+
+.example-form {
+  margin-bottom: 20px;
+}
+
+.specialization-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specialization-table th, .specialization-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.specialization-table th {
+  background-color: #f2f2f2;
+}
+
+button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d32f2f;
+}
+

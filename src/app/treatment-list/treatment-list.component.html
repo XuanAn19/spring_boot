@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="content">
+    <!-- Danh sách lịch hẹn -->
+    <div *ngIf="dataSource.data.length > 0; else noAppointments" class="appointments-container">
+      <h2>Danh sách lịch hẹn</h2>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Cột Tên người dùng -->
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef> Tên người dùng </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.user.user.firstName }} {{ appointment.user.user.lastName }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Email -->
+          <ng-container matColumnDef="userEmail">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.user.user.email }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Ngày hẹn -->
+          <ng-container matColumnDef="appointmentDate">
+            <th mat-header-cell *matHeaderCellDef> Ngày hẹn </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.appointmentDate | date: 'dd/MM/yyyy' }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Thời gian -->
+          <ng-container matColumnDef="appointmentTime">
+            <th mat-header-cell *matHeaderCellDef> Thời gian </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.appointmentTime }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Ngày đặt hẹn -->
+          <ng-container matColumnDef="bookingDate">
+            <th mat-header-cell *matHeaderCellDef> Ngày đặt hẹn </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.bookingDate | date: 'dd/MM/yyyy' }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Lý do -->
+          <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef> Lý do </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.reason }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Trạng thái -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+            <td mat-cell *matCellDef="let appointment">
+              {{ appointment.status }}
+            </td>
+          </ng-container>
+  
+          <!-- Cột Hành động -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Hành động </th>
+            <td mat-cell *matCellDef="let appointment">
+              <button
+                *ngIf="appointment.status === 'ACCEPTED'"
+                mat-raised-button
+                color="primary"
+                (click)="openTreatmentForm(appointment)"
+              >
+                Thêm điều trị
+              </button>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="viewTreatmentHistory(appointment.user.user.userId)"
+              >
+                Xem LS điều trị
+              </button>
+            </td>
+          </ng-container>
+  
+          <!-- Header row -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <!-- Data row -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Thông báo không có lịch hẹn -->
+    <ng-template #noAppointments>
+      <div class="noAppointments">
+        <h2>Không có lịch hẹn nào.</h2>
+      </div>
+    </ng-template>
+    <div class="overlay" *ngIf="showTreatmentForm || showTreatmentHistory"></div>
+    <!-- Form thêm/cập nhật điều trị -->
+    <div *ngIf="showTreatmentForm" class="treatment-form">
+      <h2>{{ isEditMode ? 'Cập nhật điều trị' : 'Thêm thông tin điều trị' }}</h2>
+      <form (ngSubmit)="saveTreatment()">
+        <div>
+          <label>Chẩn đoán:</label>
+          <textarea [(ngModel)]="treatment.diagnosis" name="diagnosis" required></textarea>
+        </div>
+        <div>
+          <label>Phương pháp điều trị:</label>
+          <textarea [(ngModel)]="treatment.treatmentMethod" name="treatmentMethod" required></textarea>
+        </div>
+        <div>
+          <label>Ghi chú:</label>
+          <textarea [(ngModel)]="treatment.notes" name="notes"></textarea>
+        </div>
+        <div>
+          <label>Kết quả:</label>
+          <textarea [(ngModel)]="treatment.result" name="result"></textarea>
+        </div>
+        <div>
+          <label>Đường dẫn file:</label>
+          <input type="text" [(ngModel)]="treatment.filePath" name="filePath" />
+        </div>
+        <div>
+          <label>Ngày điều trị:</label>
+          <input type="date" [(ngModel)]="treatment.treatmentDate"  />
+        </div>
+        <div class="button-container">
+          <button type="submit" mat-raised-button color="primary">{{ isEditMode ? 'Cập nhật' : 'Lưu' }}</button>
+          <button type="button" mat-raised-button (click)="resetForm()">Đóng</button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Lịch sử điều trị -->
+    <div *ngIf="showTreatmentHistory" class="treatment-history">
+      <h2>Lịch sử điều trị</h2>
+      <div *ngFor="let treatment of treatmentHistory" class="treatment-record">
+        <p><strong>Ngày điều trị:</strong> {{ treatment.treatmentDate | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Chẩn đoán:</strong> {{ treatment.diagnosis }}</p>
+        <p><strong>Phương pháp điều trị:</strong> {{ treatment.treatmentMethod }}</p>
+        <p><strong>Ghi chú:</strong> {{ treatment.notes }}</p>
+        <p><strong>Kết quả:</strong> {{ treatment.result }}</p>
+        <p><strong>Đường dẫn file:</strong> <a [href]="treatment.filePath" target="_blank">{{ treatment.filePath }}</a></p>
+        <button mat-raised-button color="warn" (click)="deleteTreatment(treatment.treatmentId)">Xóa</button>
+        <hr />
+      </div>
+      <button mat-raised-button (click)="resetForm()">Đóng</button>
+    </div>
+  </div>
+</body>
+</html>

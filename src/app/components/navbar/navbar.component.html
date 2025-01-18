@@ -1,0 +1,52 @@
+<nav id="navbar">
+
+  <span *ngIf="!isAdmin && !isDoctor" routerLink="/" class="navbar-title">
+    <p id="title1">Booking</p>
+    <p id="title2">HealthCare</p>
+  </span>
+  <span  *ngIf="isDoctor" routerLink="/doctorDashboard"  class="navbar-title">
+    <p id="title1">Booking</p>
+    <p id="title2">HealthCare</p>
+  </span>
+  <span *ngIf="isAdmin" routerLink="/adminDashboard"  class="navbar-title">
+    <p id="title1">Booking</p>
+    <p id="title2">HealthCare</p>
+  </span>
+
+  <div class="navlinks" [class.menuClass]="menuVariable">
+
+    <div *ngIf="!isAdmin && !isDoctor" id="links">
+      <a class="navlink" routerLink="/">Home</a>
+      <a class="navlink" routerLink="/about">About</a>
+      <a class="navlink" routerLink="/doctors">Doctors</a>
+      <a class="navlink" routerLink="/contact">Contact</a>
+    </div>
+
+    <div id="buttons">
+      <button *ngIf="!isAdmin && !isDoctor" id="btn1" routerLink="/userDashboard">Đặt Lịch Hẹn</button>
+      <ng-container *ngIf="isLoggedIn">
+        <button id="btn2" [matMenuTriggerFor]="userMenu">Tài Khoản</button>
+      </ng-container>
+    </div>
+
+  </div>
+
+  <button (click)="openMenu()" id="menu-btn" mat-icon-button class="example-icon"
+    aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+</nav>
+
+<mat-menu id="matMenu" #userMenu="matMenu">
+  <button mat-menu-item *ngIf="isNormalUser" routerLink="/userProfile">Thông Tin Người Dùng</button>
+  <button mat-menu-item *ngIf="isDoctor" routerLink="/doctorProfile">Thông Tin Bác Sĩ</button>
+  <button mat-menu-item *ngIf="isAdmin" routerLink="/adminProfile">Thông Tin Admin</button>
+  <button mat-menu-item *ngIf="isNormalUser" routerLink="/userAppointments">Lịch Hẹn Của Tôi</button>
+  <button mat-menu-item *ngIf="isAdmin" routerLink="/addDoctor">Thêm Bác Sĩ</button>
+  <button mat-menu-item *ngIf="isAdmin" routerLink="/add-user">Quản lý Người Dùng</button>
+  <button mat-menu-item *ngIf="isAdmin" routerLink="/addSpecialization">Thêm Chuyên Môn</button>
+  <button mat-menu-item *ngIf="isDoctor" routerLink="/doctorAppointments">Lịch Hẹn</button>
+  <button mat-menu-item *ngIf="isDoctor" routerLink="/treatment-list">Điều Trị</button>
+  <button mat-menu-item (click)="logout()">Đăng Xuất</button>
+</mat-menu>
